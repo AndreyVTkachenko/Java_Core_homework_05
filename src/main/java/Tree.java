@@ -34,11 +34,11 @@ public class Tree {
 
         int subDirCounter = 0;
         for (File f : files) {
-            boolean isSubDir = f.isDirectory();
+            boolean isSubDir = f.isDirectory() && !f.isHidden();
             boolean last = (++subDirCounter == subDirTotal);
             if (isSubDir) {
                 print(f, indent, last);
-            } else {
+            } else if (!f.isHidden()) {
                 System.out.print(indent);
                 if (last) {
                     System.out.print("└─");
