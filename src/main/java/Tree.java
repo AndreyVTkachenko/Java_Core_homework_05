@@ -33,10 +33,19 @@ public class Tree {
         }
 
         int subDirCounter = 0;
-        for (int i = 0; i < files.length; i++){
-            if (files[i].isDirectory())
-            {
-                print(files[i], indent, subDirTotal == ++subDirCounter);
+        for (File f : files) {
+            boolean isSubDir = f.isDirectory();
+            boolean last = (++subDirCounter == subDirTotal);
+            if (isSubDir) {
+                print(f, indent, last);
+            } else {
+                System.out.print(indent);
+                if (last) {
+                    System.out.print("└─");
+                } else {
+                    System.out.print("├─");
+                }
+                System.out.println(f.getName());
             }
         }
     }
